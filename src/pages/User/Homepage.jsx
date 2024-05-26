@@ -245,8 +245,8 @@ export const Homepage = () => {
 
       <div className="px-8 pt-8 pb-12 text-sm text-white text-center bg-blue-900">
         <div className="text-lg text-yellow-300 tracking-wider font-medium mb-3">Trusted by 500k+ Students</div>
-        <div className="text-2xl font-medium tracking-wide mb-3">Gabung komunitas LearnWise Sekarang !</div>
-        <div className="text-lg font-medium text-center desktop:px-64 text-gray-300 mb-10">LearnWise telah dipercaya dan mendapat review baik dari alumni LearnWise dari seluruh Indonesia</div>
+        <div className="text-2xl font-medium tracking-wide mb-3">Gabung komunitas CourseWay Sekarang !</div>
+        <div className="text-lg font-medium text-center desktop:px-64 text-gray-300 mb-10">CourseWay telah dipercaya dan mendapat review baik dari alumni CourseWay dari seluruh Indonesia</div>
         <div className="carousel carousel-center h-80 mobile:w-full desktop:w-1/2 desktop:h-96 desktopfull::w-1/3 desktopfull:h-[400px] bg-transparent space-x-4 rounded-box">
           <Carousel leftControl={<div className="hidden"></div>} rightControl={<div className="hidden"></div>}>
             {dataRating.slice(0, 9).map((value, index) => {

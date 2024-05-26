@@ -4,7 +4,7 @@ export const FooterUser = () => {
   return (
     <div>
       <footer className="mobile:px-8 desktop:px-16 desktopfull:px-16 py-4 border-t bg-base-100 border-base-300">
-        <div className="text-primary font-semibold text-xl">LearnWise <span className="text-xs text-gray-300 ">1.1.0</span></div>
+        <div className="text-primary font-semibold text-xl">CourseWay <span className="text-xs text-gray-300 ">1.1.0</span></div>
         <div className="text-sm mt-1">Course Media since 2023</div>
         {/* <aside className="items-center grid-flow-col">
           <svg

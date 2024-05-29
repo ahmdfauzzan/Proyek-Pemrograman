@@ -24,7 +24,7 @@ export const RouteLists = () => {
     <BrowserRouter>
       <Routes>
         {/* AUTH */}
-        <Route path="/login" element={<LoginUser />} /> |||
+        <Route path="/login" element={<LoginUser />} />
         <Route path="/register" element={<Register />} />
         <Route path="/otp" element={<OTP />} />
         <Route path="/sendemail" element={<SendEmail />} />

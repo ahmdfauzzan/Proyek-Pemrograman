@@ -7,7 +7,7 @@ import { CookieStorage, CookiesKeys } from "../../utils/cookies";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataMe } from "../../redux/actions/meAction";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
-import logo from "../../assets/img/logo-white.png";
+import logo from "../../assets/img/white-logo-cw.png";
 
 export const HeaderUser = () => {
   const navigate = useNavigate();

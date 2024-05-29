@@ -32,7 +32,7 @@
     "react-toastify": "^9.1.3",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "rimraf": "^4.4.1",
+    "rimraf": "^5.0.7",
     "svgo": "^2.8.0",
     "universal-cookie": "^6.1.1",
     "use-debounce": "^10.0.0",

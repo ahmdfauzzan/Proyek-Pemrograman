@@ -31,8 +31,8 @@ export const RouteLists = () => {
         <Route path="/reset" element={<ResetPassword />} />
 
         {/* USER */}
-        <Route path="//" element={<Homepage />} />
-        <Route path="/home/" element={<Homepage />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/home" element={<Homepage />} />
         <Route path="/kelas" element={<Class />} />
         <Route path="/kelassaya" element={<MyClass />} />
         <Route path="/notifikasi" element={<Notifikasi />} />

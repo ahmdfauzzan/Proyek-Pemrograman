@@ -15,7 +15,7 @@ import { FooterUser } from "../../components/Footer/FooterUser";
 
 import { Carousel } from "flowbite-react";
 
-export const Homepage = () => {
+export const Homepage = () => {{
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 

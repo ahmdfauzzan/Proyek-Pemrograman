@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useLoginUser } from "../../services/auth/PostLogin";
-import belajar from "../../assets/img/logo-white.png";
-import belajardua from "../../assets/img/logo-purple.png";
+import belajar from "../../assets/img/white-logo-cw.png";
+import belajardua from "../../assets/img/purple-logo-cw.png";
 
 export const LoginUser = () => {
 

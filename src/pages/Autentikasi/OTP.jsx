@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
-import belajar from "../../assets/img/logo-white.png";
-import belajardua from "../../assets/img/logo-purple.png";
+import belajar from "../../assets/img/white-logo-cw.png";
+import belajardua from "../../assets/img/purple-logo-cw.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSendOTP } from "../../services/auth/otp_user";
 import { useReSendOTP } from "../../services/auth/resendOtp_user";

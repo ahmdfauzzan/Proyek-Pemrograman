@@ -60,7 +60,7 @@ export const Payment = () => {
     <>
       <LayoutUser>
         <div>
-          <Link to="/detail" className="flex items-center text-black hover:underline">
+          <Link to="/kelas" className="flex items-center text-black hover:underline">
             <FaArrowLeft className="mr-2" />
             <h2 className="font-bold">Kembali</h2>
           </Link>

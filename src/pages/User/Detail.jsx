@@ -134,7 +134,7 @@ export const Detail = () => {
 
   const handleJoinTelegram = () => {
     // Membuka link Telegram pada tab baru
-    const telegramUrl = dataCourseDetail?.course.url_gc_tele;
+    const telegramUrl = "https://t.me/+a15IW5HJq0kxMGRl";
     if (telegramUrl) {
       window.open(telegramUrl, "_blank");
     }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSendEmail } from "../../services/auth/PostSendEmail";
-import belajar from "../../assets/img/logo-white.png";
-import belajardua from "../../assets/img/logo-purple.png";
+import belajar from "../../assets/img/white-logo-cw.png";
+import belajardua from "../../assets/img/purple-logo-cw.png";
 
 export const SendEmail = () => {
   const isMobile = window.innerWidth <= 768;

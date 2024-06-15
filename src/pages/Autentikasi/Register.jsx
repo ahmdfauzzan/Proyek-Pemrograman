@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import belajar from "../../assets/img/logo-white.png";
-import belajardua from "../../assets/img/logo-purple.png";
+import belajar from "../../assets/img/white-logo-cw.png";
+import belajardua from "../../assets/img/purple-logo-cw.png";
 import { useRegisterUser } from "../../services/auth/register_user";
 import { Link } from "react-router-dom";
 

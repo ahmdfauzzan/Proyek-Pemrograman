@@ -10,7 +10,7 @@ const fetchUserProgress = async ({ queryKey }) => {
       return result;
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 };
 

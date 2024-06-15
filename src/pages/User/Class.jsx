@@ -11,8 +11,6 @@ import { CookieStorage, CookiesKeys } from "../../utils/cookies";
 export const Class = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const token = CookieStorage.get(CookiesKeys.AuthToken);
-  const isUserAuthenticated = !!token;
   const isMobile = window.innerWidth <= 768;
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -39,18 +37,10 @@ export const Class = () => {
       setSearchQuery(state?.search);
       setCurrentPage(1);
     }
-  }, [handleAll, searchQuery, state]);
+  }, [handleAll, searchQuery, state, navigate]); // Tambahkan navigate ke dalam array dependensi
 
   // GET COURSE ALL
-  const { data: coursesAll, isLoading } = useCourse(
-    searchQuery,
-    10,
-    selectedCategories,
-    selectedLevels,
-    "",
-    "",
-    currentPage
-  );
+  const { data: coursesAll, isLoading } = useCourse(searchQuery, 10, selectedCategories, selectedLevels, "", "", currentPage);
 
   const { data: levelsAll } = useCourse("", 10, [], [], "", "", currentPage);
   const { data: categoryAll } = useCategory(10);
@@ -63,9 +53,7 @@ export const Class = () => {
       setDataCategories(categoryAll.data.category);
     }
     if (levelsAll?.data && levelsAll?.data?.course) {
-      setDataLevels([
-        ...new Set(levelsAll.data.course.map((course) => course.level)),
-      ]);
+      setDataLevels([...new Set(levelsAll.data.course.map((course) => course.level))]);
     }
   }, [coursesAll, categoryAll, levelsAll]);
 
@@ -140,10 +128,6 @@ export const Class = () => {
     return true;
   });
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
   const closeSidebar = () => {
     setSidebarOpen(false);
   };
@@ -183,10 +167,7 @@ export const Class = () => {
         ) : (
           <div className="flex items-center justify-between px-7 mb-4 mt-6">
             <div className="font-bold text-lg">Topik Kelas</div>
-            <div
-              className="font-bold text-primary cursor-pointer"
-              onClick={openFilter}
-            >
+            <div className="font-bold text-primary cursor-pointer" onClick={openFilter}>
               Filter
             </div>
           </div>
@@ -201,30 +182,18 @@ export const Class = () => {
             </h3>
             <div className="flex flex-col gap-4 whitespace-nowrap overflow-x-hidden">
               <div className="space-y-3 px-1.5">
-                <h4 className="text-base font-bold text-primary -pt-3">
-                  Kategori
-                </h4>
+                <h4 className="text-base font-bold text-primary -pt-3">Kategori</h4>
                 {dataCategories.map((category) => {
                   return (
-                    <div
-                      className="flex gap-2 items-center"
-                      key={category.kategori_id}
-                    >
+                    <div className="flex gap-2 items-center" key={category.kategori_id}>
                       <input
                         type="checkbox"
                         id={`category_${category.kategori_id}`}
-                        onChange={() =>
-                          handleCategoryChange(category.kategori_id)
-                        }
-                        checked={selectedCategories.includes(
-                          category.kategori_id
-                        )}
+                        onChange={() => handleCategoryChange(category.kategori_id)}
+                        checked={selectedCategories.includes(category.kategori_id)}
                         className="appearance-none w-5 h-5 cursor-pointer border-2 border-gray-500 rounded-lg bg-[#E8F1FF] checked:bg-[#6148FF] checked:border-0"
                       />
-                      <label
-                        htmlFor={`category_${category.kategori_id}`}
-                        className="cursor-pointer hover:text-primary"
-                      >
+                      <label htmlFor={`category_${category.kategori_id}`} className="cursor-pointer hover:text-primary">
                         {category.title}
                       </label>
                     </div>
@@ -232,9 +201,7 @@ export const Class = () => {
                 })}
               </div>
               <div className="space-y-3 px-1.5">
-                <h4 className="text-base font-bold text-primary -pt-3">
-                  Level Kesulitan
-                </h4>
+                <h4 className="text-base font-bold text-primary -pt-3">Level Kesulitan</h4>
                 {dataLevels?.map((level) => {
                   return (
                     <div className="flex gap-2 items-center">
@@ -245,10 +212,7 @@ export const Class = () => {
                         checked={selectedLevels.includes(level)}
                         className="appearance-none w-5 h-5 border-2 border-gray-500 rounded-lg bg-[#E8F1FF] checked:bg-[#6148FF] checked:border-0"
                       />
-                      <label
-                        htmlFor={level}
-                        className="cursor-pointer hover:text-primary"
-                      >
+                      <label htmlFor={level} className="cursor-pointer hover:text-primary">
                         {level}
                       </label>
                     </div>
@@ -256,10 +220,7 @@ export const Class = () => {
                 })}
               </div>
               <div className="w-full flex justify-center mt-2">
-                <button
-                  className="font-bold text-red-500 hover:underline"
-                  onClick={handleClearFilters}
-                >
+                <button className="font-bold text-red-500 hover:underline" onClick={handleClearFilters}>
                   Hapus Filter
                 </button>
               </div>
@@ -269,15 +230,9 @@ export const Class = () => {
           {/* FILTER Mobile */}
           {isMobile && (
             <>
+              <div className="fixed inset-0 bg-black bg-opacity-40 z-50" style={{ display: isFilterOpen ? "block" : "none" }} onClick={closeFilter}></div>
               <div
-                className="fixed inset-0 bg-black bg-opacity-40 z-50"
-                style={{ display: isFilterOpen ? "block" : "none" }}
-                onClick={closeFilter}
-              ></div>
-              <div
-                className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl transform ${
-                  isFilterOpen ? "translate-y-0" : "translate-y-full"
-                } transition-transform ease-in-out duration-300 overflow-hidden z-50`}
+                className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl transform ${isFilterOpen ? "translate-y-0" : "translate-y-full"} transition-transform ease-in-out duration-300 overflow-hidden z-50`}
                 style={{ maxHeight: "75vh" }}
               >
                 <div className="flex justify-between items-center px-5 py-3 border-b">
@@ -287,29 +242,17 @@ export const Class = () => {
                     <span className="text-gray-500 text-xl">X</span>
                   </button>
                 </div>
-                <div
-                  className="gap-4 whitespace-nowrap overflow-y-auto px-4"
-                  style={{ maxHeight: "60vh" }}
-                >
+                <div className="gap-4 whitespace-nowrap overflow-y-auto px-4" style={{ maxHeight: "60vh" }}>
                   <div className="space-y-3 px-1.5 pt-4">
-                    <h4 className="text-base font-bold text-primary -pt-3">
-                      Kategori
-                    </h4>
+                    <h4 className="text-base font-bold text-primary -pt-3">Kategori</h4>
                     {dataCategories.map((category) => {
                       return (
-                        <div
-                          className="flex gap-2 items-center"
-                          key={category.kategori_id}
-                        >
+                        <div className="flex gap-2 items-center" key={category.kategori_id}>
                           <input
                             type="checkbox"
                             id={`category_${category.kategori_id}`}
-                            onChange={() =>
-                              handleCategoryChange(category.kategori_id)
-                            }
-                            checked={selectedCategories.includes(
-                              category.kategori_id
-                            )}
+                            onChange={() => handleCategoryChange(category.kategori_id)}
+                            checked={selectedCategories.includes(category.kategori_id)}
                             className="appearance-none w-5 h-5 border-2 border-gray-500 rounded-lg bg-[#E8F1FF] checked:bg-[#6148FF] checked:border-0"
                           />
                           <span className="">{category.title}</span>
@@ -318,9 +261,7 @@ export const Class = () => {
                     })}
                   </div>
                   <div className="space-y-3 px-1.5 pt-4">
-                    <h4 className="text-base font-bold text-primary -pt-3">
-                      Level Kesulitan
-                    </h4>
+                    <h4 className="text-base font-bold text-primary -pt-3">Level Kesulitan</h4>
                     {dataLevels?.map((level) => {
                       return (
                         <div className="flex gap-2 items-center">
@@ -339,10 +280,7 @@ export const Class = () => {
                     })}
                   </div>
                   <div className="w-full flex justify-center mt-2">
-                    <button
-                      className="font-bold text-red-500 hover:underline mb-5"
-                      onClick={handleClearFilters}
-                    >
+                    <button className="font-bold text-red-500 hover:underline mb-5" onClick={handleClearFilters}>
                       Hapus Filter
                     </button>
                   </div>
@@ -352,40 +290,15 @@ export const Class = () => {
           )}
 
           {/* BODY */}
-          <div
-            className={`${
-              isMobile ? "w-full px-3" : "desktop:w-3/4 desktopfull:w-4/5 "
-            }`}
-          >
+          <div className={`${isMobile ? "w-full px-3" : "desktop:w-3/4 desktopfull:w-4/5 "}`}>
             <div className="grid grid-cols-3 gap-4 mb-7 text-center">
-              <div
-                className={`py-2 font-semibold hover:text-white rounded-full hover:bg-primary cursor-pointer shadow ${
-                  handleAll
-                    ? "bg-primary shadow-primary text-white"
-                    : "bg-white text-gray-600"
-                }`}
-                onClick={handleAllClick}
-              >
+              <div className={`py-2 font-semibold hover:text-white rounded-full hover:bg-primary cursor-pointer shadow ${handleAll ? "bg-primary shadow-primary text-white" : "bg-white text-gray-600"}`} onClick={handleAllClick}>
                 All
               </div>
-              <div
-                className={`py-2 font-semibold hover:text-white rounded-full hover:bg-primary cursor-pointer shadow ${
-                  isPremium
-                    ? "bg-primary shadow-primary text-white"
-                    : "bg-white text-gray-600"
-                }`}
-                onClick={handlePremiumClick}
-              >
+              <div className={`py-2 font-semibold hover:text-white rounded-full hover:bg-primary cursor-pointer shadow ${isPremium ? "bg-primary shadow-primary text-white" : "bg-white text-gray-600"}`} onClick={handlePremiumClick}>
                 Kelas Premium
               </div>
-              <div
-                className={`py-2 font-semibold hover:text-white rounded-full hover:bg-primary cursor-pointer shadow ${
-                  isFree
-                    ? "bg-primary te shadow-primary text-white"
-                    : "bg-white text-gray-600"
-                }`}
-                onClick={handleFreeClick}
-              >
+              <div className={`py-2 font-semibold hover:text-white rounded-full hover:bg-primary cursor-pointer shadow ${isFree ? "bg-primary te shadow-primary text-white" : "bg-white text-gray-600"}`} onClick={handleFreeClick}>
                 Kelas Gratis
               </div>
             </div>
@@ -393,13 +306,7 @@ export const Class = () => {
             {isLoading && (
               <div className="w-full flex items-center justify-center mt-4">
                 <div>
-                  <svg
-                    aria-hidden="true"
-                    className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
-                    viewBox="0 0 100 101"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                       fill="currentColor"
@@ -418,47 +325,23 @@ export const Class = () => {
               {!isLoading &&
                 filteredCourses.map((course, index) => {
                   return (
-                    <div
-                      className="rounded-3xl shadow-lg bg-white hover:shadow-2xl hover:border hover:border-gray-300 hover:scale-105 cursor-pointer"
-                      key={index}
-                      onClick={() => handleToDetail(course.course_id)}
-                    >
-                      <img
-                        src={course.url_image_preview}
-                        alt=""
-                        className="w-full h-[9rem] object-cover rounded-t-3xl"
-                      />
+                    <div className="rounded-3xl shadow-lg bg-white hover:shadow-2xl hover:border hover:border-gray-300 hover:scale-105 cursor-pointer" key={index} onClick={() => handleToDetail(course.course_id)}>
+                      <img src={course.url_image_preview} alt="" className="w-full h-[9rem] object-cover rounded-t-3xl" />
                       <div className="px-3.5 pt-2 pb-5">
                         <div className="text-primary flex justify-between items-center">
                           <div>{course.Kategori.title}</div>
                           <div className="flex items-center gap-1">
                             <FaStar className="fill-yellow-400" />
-                            <span>
-                              {course.avgRating !== 0
-                                ? Math.floor(course.avgRating * 10) / 10
-                                : "-"}
-                            </span>
+                            <span>{course.avgRating !== 0 ? Math.floor(course.avgRating * 10) / 10 : "-"}</span>
                           </div>
                         </div>
-                        <div className="font-bold whitespace-nowrap overflow-hidden text-base">
-                          {course.title}
-                        </div>
+                        <div className="font-bold whitespace-nowrap overflow-hidden text-base">{course.title}</div>
                         <div className="font-medium text-xs">
                           by <span>{course.Mentor.name}</span>
                         </div>
-                        <div
-                          className={`flex gap-1 items-center text-base font-semibold ${
-                            course.harga === 0
-                              ? "text-blue-700"
-                              : "text-green-500 "
-                          }  mt-2.5 mb-1.5`}
-                        >
+                        <div className={`flex gap-1 items-center text-base font-semibold ${course.harga === 0 ? "text-blue-700" : "text-green-500 "}  mt-2.5 mb-1.5`}>
                           <MdOutlineSell />
-                          <span>
-                            {course.harga === 0
-                              ? "Gratis"
-                              : `Rp${course.harga}`}
-                          </span>
+                          <span>{course.harga === 0 ? "Gratis" : `Rp${course.harga}`}</span>
                         </div>
                         <div className="flex items-center gap-0.5 text-xs">
                           <div>{course.level}</div>
@@ -467,11 +350,7 @@ export const Class = () => {
                           <BsDot />
                           <div>Sertifikasi Profesional</div>
                         </div>
-                        <button
-                          className={`bg-primary rounded-full p-1.5 px-6 font-medium text-white mt-2.5 w-full text-center`}
-                        >
-                          Gabung Kelas
-                        </button>
+                        <button className={`bg-primary rounded-full p-1.5 px-6 font-medium text-white mt-2.5 w-full text-center`}>Gabung Kelas</button>
                       </div>
                     </div>
                   );
@@ -482,25 +361,15 @@ export const Class = () => {
         <div className="w-full flex justify-end mb-8">
           <div className="flex justify-center mt-8 mobile:w-full tablet:w-full desktop:w-3/4 desktopfull:w-4/5">
             <button
-              className={`px-4 py-2 mx-1 rounded text-white font-bold ${
-                currentPage <= 1
-                  ? "bg-gray-300"
-                  : "bg-[#489CFF] cursor-pointer hover:bg-secondary"
-              }`}
+              className={`px-4 py-2 mx-1 rounded text-white font-bold ${currentPage <= 1 ? "bg-gray-300" : "bg-[#489CFF] cursor-pointer hover:bg-secondary"}`}
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage <= 1}
             >
               Previous Page
             </button>
-            <span className="px-4 py-2 mx-1 rounded text-gray-700 font-bold">
-              Page {currentPage}
-            </span>
+            <span className="px-4 py-2 mx-1 rounded text-gray-700 font-bold">Page {currentPage}</span>
             <button
-              className={`px-4 py-2 mx-1 rounded text-white font-bold ${
-                currentPage === lastPage
-                  ? "bg-gray-300"
-                  : "bg-[#489CFF] cursor-pointer hover:bg-secondary"
-              }`}
+              className={`px-4 py-2 mx-1 rounded text-white font-bold ${currentPage === lastPage ? "bg-gray-300" : "bg-[#489CFF] cursor-pointer hover:bg-secondary"}`}
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === lastPage}
             >

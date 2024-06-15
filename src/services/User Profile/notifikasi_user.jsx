@@ -8,12 +8,12 @@ const fetchNotifikasi = async ({ queryKey }) => {
   return await http
     .get(url)
     .then((result) => {
-      console.log(result.data.data.notificationsWithType, "result data");
+      // console.log(result.data.data.notificationsWithType, "result data");
       const notif = result.data;
       return notif;
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 };
 

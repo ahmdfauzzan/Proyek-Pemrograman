@@ -8,7 +8,7 @@ export const SendEmail = () => {
 
   const [getEmail, setEmail] = useState("");
 
-  const { mutate: postEmail, data } = useSendEmail();
+  const { mutate: postEmail } = useSendEmail();
 
   const handleSendEmail = () => {
     postEmail({
@@ -19,28 +19,12 @@ export const SendEmail = () => {
   return (
     <div className="flex h-screen">
       {/* Bagian Kiri */}
-      <div
-        className={`bg-gray-100 ${
-          isMobile
-            ? "w-full h-full flex-grow flex flex-col justify-center items-center"
-            : "w-1/2 flex justify-center items-center"
-        }`}
-      >
+      <div className={`bg-gray-100 ${isMobile ? "w-full h-full flex-grow flex flex-col justify-center items-center" : "w-1/2 flex justify-center items-center"}`}>
         <div className={`${isMobile ? "block mb-6" : "hidden"}`}>
-          <img
-            src={belajardua}
-            alt="Belajar"
-            className="object-cover w-1/3 mx-auto"
-          />
+          <img src={belajardua} alt="Belajar" className="object-cover w-1/3 mx-auto" />
         </div>
-        <div
-          className={`p-8 text-sm border rounded-md border-primary bg-white shadow-lg shadow-primary ${
-            isMobile ? "w-4/5 mx-auto" : "w-3/4"
-          }`}
-        >
-          <h1 className="text-3xl font-bold mb-0.5 text-primary">
-            Reset Password
-          </h1>
+        <div className={`p-8 text-sm border rounded-md border-primary bg-white shadow-lg shadow-primary ${isMobile ? "w-4/5 mx-auto" : "w-3/4"}`}>
+          <h1 className="text-3xl font-bold mb-0.5 text-primary">Reset Password</h1>
           <hr className="my-3" />
           <div>
             <div className="mb-3 space-y-1">
@@ -59,11 +43,7 @@ export const SendEmail = () => {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="bg-primary hover:bg-secondary text-white font-semibold rounded-md py-2 px-4 w-full mb-4"
-              onClick={handleSendEmail}
-            >
+            <button type="submit" className="bg-primary hover:bg-secondary text-white font-semibold rounded-md py-2 px-4 w-full mb-4" onClick={handleSendEmail}>
               Kirim
             </button>
           </div>

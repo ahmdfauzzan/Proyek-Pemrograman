@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { FaStar, FaFilter } from "react-icons/fa";
-import { RiShieldStarLine, RiBook3Line } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCourse } from "../../services/user/GetCourse";
 import { useCategory } from "../../services/user/GetCategory";
 import { LayoutUser } from "../../Layout/LayoutUser";
 import { useMyCourse } from "../../services/user/GetMyCourse";
 import { useGetProgress } from "../../services/user/GetProgressCourses";
-import { CookieStorage, CookiesKeys } from "../../utils/cookies";
 import { BsDot } from "react-icons/bs";
 
 export const MyClass = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const token = CookieStorage.get(CookiesKeys.AuthToken);
-  const isUserAuthenticated = !!token;
   const isMobile = window.innerWidth <= 768;
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -41,17 +37,16 @@ export const MyClass = () => {
       setSearchQuery(state?.search);
       setCurrentPage(1);
     }
-  }, [handleAll, searchQuery, state]);
+  }, [handleAll, searchQuery, state, navigate]); // Include navigate in the dependency array
 
   // GET COURSE ALL
   const { data: coursesAll, isLoading } = useMyCourse(searchQuery, 10, selectedCategories, selectedLevels, "", "", currentPage);
 
   const { data: levelsAll } = useCourse("", 10, [], [], "", "", currentPage);
   const { data: categoryAll } = useCategory(10);
-  const { data: progressCourse, refetch: refetchProgress } = useGetProgress();
+  const { data: progressCourse } = useGetProgress();
 
   const progress = progressCourse?.data?.data?.result;
-  console.log(progress, "progressnyaa");
 
   useEffect(() => {
     if (coursesAll?.data && coursesAll?.data?.userCourse) {
@@ -150,10 +145,6 @@ export const MyClass = () => {
     if (isSelesai) return course.progress === 100.0;
     return true;
   });
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
 
   const closeSidebar = () => {
     setSidebarOpen(false);

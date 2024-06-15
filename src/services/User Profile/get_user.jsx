@@ -8,11 +8,11 @@ const fetchUserData = async ({ queryKey }) => {
     .get(_key)
     .then((result) => {
       const resultMe = result.data.data.user;
-      console.log(resultMe);
+      // console.log(resultMe);
       return resultMe;
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 };
 

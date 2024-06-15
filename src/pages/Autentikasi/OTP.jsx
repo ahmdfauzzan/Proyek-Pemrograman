@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
 import belajar from "../../assets/img/white-logo-cw.png";
-import belajardua from "../../assets/img/purple-logo-cw.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSendOTP } from "../../services/auth/otp_user";
 import { useReSendOTP } from "../../services/auth/resendOtp_user";
@@ -13,7 +12,7 @@ export const OTP = () => {
   const navigate = useNavigate();
   const inputRefs = useRef([]);
   const [registeredEmail, setRegisteredEmail] = useState(""); // State to hold registered email
-  const [OtpError, setOtpError] = useState("");
+  const [, setOtpError] = useState("");
   const [timeLeft, setTimeLeft] = useState(60);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -72,23 +71,19 @@ export const OTP = () => {
     if (resendOTPTask) {
       resendOTPTask
         .then(() => {
-          console.log("OTP berhasil dikirim ulang");
           // Mulai hitung mundur setelah OTP berhasil dikirim
           setTimeLeft(60);
           setIsButtonDisabled(true);
         })
-        .catch(() => {
-          console.error("Gagal mengirimkan ulang OTP");
-        });
+        .catch(() => {});
     } else {
-      console.error("resendOTP is undefined");
     }
   };
 
   const handleChange = (index, event) => {
     const otp = [...otpValues];
     otp[index] = event.target.value;
-    console.log(event.target.value);
+
     setOtpValues(otp);
 
     if (event.target.value !== "" && index < otpValues.length - 1) {
@@ -122,7 +117,6 @@ export const OTP = () => {
           }, 3000);
         },
         onError: () => {
-          console.error("Invalid Activation Code or Code Expired");
           // Optionally, you can add a toast for errors too
           toast.error("Kode Aktivasi Tidak Valid atau Kode Telah Kedaluwarsa", {
             position: "top-center",
@@ -131,7 +125,6 @@ export const OTP = () => {
         },
       });
     } else {
-      console.error("Harap lengkapi semua digit OTP terlebih dahulu");
       // Optionally, add a toast for this error as well
       toast.error("Kode OTP salah", {
         position: "top-center",
@@ -142,11 +135,7 @@ export const OTP = () => {
 
   return (
     <div className="flex flex-wrap h-screen">
-      <div
-        className={`bg-gray-100 w-full md:w-1/2 flex ${
-          isMobile ? "mt-5" : "items-center justify-center"
-        }`}
-      >
+      <div className={`bg-gray-100 w-full md:w-1/2 flex ${isMobile ? "mt-5" : "items-center justify-center"}`}>
         <div className="text-sm border rounded-md border-primary bg-white shadow-lg shadow-primary p-8 flex flex-col items-center w-full max-w-md">
           <div className="flex items-center justify-between w-full mb-8">
             <Link to="/register" className="text-black hover:text-indigo-600">
@@ -154,18 +143,10 @@ export const OTP = () => {
             </Link>
           </div>
 
-          <h2 className="text-3xl mb-2 text-indigo-600 text-center font-bold">
-            Masukkan OTP
-          </h2>
-          <p className="text-sm text-gray-500 text-center">
-            Ketik 6 digit kode yang dikirimkan ke {registeredEmail}
-          </p>
+          <h2 className="text-3xl mb-2 text-indigo-600 text-center font-bold">Masukkan OTP</h2>
+          <p className="text-sm text-gray-500 text-center">Ketik 6 digit kode yang dikirimkan ke {registeredEmail}</p>
 
-          {isError && (
-            <div className="text-red-800 text-medium bg-red-300 text-center mt-4 mb-5 border rounded-md border-red-300 shadow py-1.5 px-3">
-              {error.message}
-            </div>
-          )}
+          {isError && <div className="text-red-800 text-medium bg-red-300 text-center mt-4 mb-5 border rounded-md border-red-300 shadow py-1.5 px-3">{error.message}</div>}
 
           <div className="flex justify-center gap-2 mb-8">
             {otpValues.map((value, index) => (
@@ -182,16 +163,8 @@ export const OTP = () => {
             ))}
           </div>
 
-          <button
-            className={`text-primary hover:text-secondary text-sm mb-4 ${
-              isButtonDisabled ? "opacity-70 cursor-not-allowed" : ""
-            }`}
-            onClick={resendOTPOnClick}
-            disabled={isButtonDisabled}
-          >
-            {isButtonDisabled
-              ? `Kirim Ulang OTP dalam ${timeLeft} detik`
-              : "Kirim Ulang OTP"}
+          <button className={`text-primary hover:text-secondary text-sm mb-4 ${isButtonDisabled ? "opacity-70 cursor-not-allowed" : ""}`} onClick={resendOTPOnClick} disabled={isButtonDisabled}>
+            {isButtonDisabled ? `Kirim Ulang OTP dalam ${timeLeft} detik` : "Kirim Ulang OTP"}
           </button>
 
           <button

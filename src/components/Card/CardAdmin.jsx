@@ -4,8 +4,8 @@ import { useUser } from "../../services/admin/GetUsers";
 import { useCourseAdmin } from "../../services/admin/GetCourseAdmin";
 
 export const CardAdmin = () => {
-  const [getPage, setPage] = useState(1);
-  const [getLimit, setLimit] = useState(10);
+  const [getPage] = useState(1);
+  const [getLimit] = useState(10);
 
   // GET USER
   const { data: getDataUser } = useUser({

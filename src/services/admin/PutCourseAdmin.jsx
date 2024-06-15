@@ -3,7 +3,7 @@ import { API_ENDPOINT } from "../../utils/api-endpoint";
 import http from "../../utils/http";
 
 export const fetchPutCourse = async (input, course_id) => {
-  console.log(input);
+  // console.log(input);
   return await http
     .put(API_ENDPOINT.PUT_COURSE + course_id, input, {
       headers: {
@@ -11,10 +11,10 @@ export const fetchPutCourse = async (input, course_id) => {
       },
     })
     .then((result) => {
-      console.log(result);
+      // console.log(result);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 };
 

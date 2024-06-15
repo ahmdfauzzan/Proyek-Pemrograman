@@ -6,10 +6,10 @@ export const fetchSendEmail = async (input) => {
   return await http
     .post(API_ENDPOINT.POST_SEND_EMAIL, input)
     .then((result) => {
-      console.log(result);
+      // console.log(result);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 };
 

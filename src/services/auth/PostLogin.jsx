@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import http from "../../utils/http";
 import { API_ENDPOINT } from "../../utils/api-endpoint";
 import { CookiesKeys, CookieStorage } from "../../utils/cookies";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginUser = async (input) => {

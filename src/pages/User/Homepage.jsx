@@ -17,7 +17,7 @@ import { Carousel } from "flowbite-react";
 
 export const Homepage = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [, setSearchQuery] = useState("");
 
   const token = CookieStorage.get(CookiesKeys.AuthToken);
 
@@ -44,7 +44,7 @@ export const Homepage = () => {
 
   // GET SALARY
 
-  const { data: getDataSalary, isSuccess: salarySuccess } = useSalary({
+  const { data: getDataSalary } = useSalary({
     course_id: getIdCourse,
   });
 
@@ -54,7 +54,6 @@ export const Homepage = () => {
   const { data: getDataRating } = useGetRating();
 
   const dataRating = getDataRating?.data.rating || [];
-  console.log("🚀 ~ file: Homepage.jsx:71 ~ Homepage ~ dataRating:", dataRating);
 
   // GET COURSE FOR REVIEW CATEGORY
   const { data: getDataCourse } = useCourse("", 30, [], [], "", "", 1);
@@ -248,9 +247,7 @@ export const Homepage = () => {
             {dataRating.slice(0, 9).map((value, index) => {
               const categoryReview = (id) => {
                 const result = dataCategory.filter((value) => {
-                  if (value.course_id === id) {
-                    return value.category;
-                  }
+                  return value.course_id === id;
                 });
 
                 return result;

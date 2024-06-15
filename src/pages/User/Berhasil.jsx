@@ -5,7 +5,6 @@ import { LayoutUser } from "../../Layout/LayoutUser";
 
 export const Berhasil = () => {
   const { state } = useLocation();
-  console.log(state, "state di berhasil");
 
   const navigate = useNavigate();
 

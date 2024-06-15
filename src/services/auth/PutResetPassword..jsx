@@ -6,12 +6,12 @@ export const fetchResetPassword = async (input) => {
   return await http
     .put(API_ENDPOINT.PUT_RESET_PASSWORD, input)
     .then((result) => {
-      console.log(input);
-      console.log(result);
+      // console.log(input);
+      // console.log(result);
     })
     .catch((err) => {
-      console.log(input);
-      console.log(err);
+      // console.log(input);
+      // console.log(err);
     });
 };
 

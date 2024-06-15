@@ -9,8 +9,8 @@ const UpdateUser = async (input) => {
       return result;
     })
     .catch((err) => {
-      console.log(err);
-      alert(err)
+      // console.log(err);
+      alert(err);
     });
 };
 

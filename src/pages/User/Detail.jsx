@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { FaTelegramPlane, FaStar, FaRegClock, FaBookOpen, FaArrowLeft } from "react-icons/fa";
+import { FaTelegramPlane, FaStar, FaBookOpen, FaArrowLeft } from "react-icons/fa";
 import { RiShieldStarLine } from "react-icons/ri";
-import { Modal } from "flowbite-react";
+
 import { FaArrowCircleRight } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaCirclePlay } from "react-icons/fa6";
 import { GiPadlock } from "react-icons/gi";
-import Onboarding from "../../assets/img/onboarding.png";
+
 import { LayoutUser } from "../../Layout/LayoutUser";
 import { useCourseDetail } from "../../services/user/GetCourseDetail";
-import { usePostPayment } from "../../services/user/PostPayment";
+
 import { useSelector } from "react-redux";
 import { usePutVideo } from "../../services/user/PutVideo";
 import { useGetProgress } from "../../services/user/GetProgressCourses";
@@ -18,11 +18,11 @@ import { useGetRating } from "../../services/user/GetRating";
 import { usePostRating } from "../../services/user/PostRating";
 import { usePostCourse } from "../../services/user/PostBeliCourse";
 import Cookies from "universal-cookie";
-import { useLoginUser } from "../../services/auth/PostLogin";
+
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useLoginUserModal } from "../../services/auth/PostLoginModal";
 import { TbPolygon } from "react-icons/tb";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const Detail = () => {
@@ -30,10 +30,9 @@ export const Detail = () => {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
   const [currentChapterIndex, setCurrentChapterIndex] = useState(0);
   const [completedChapters, setCompletedChapters] = useState([]);
-  const [PageNow, setPageNow] = useState(1);
+  const [PageNow] = useState(1);
   const [SelctedScore, setSelctedScore] = useState("");
   const [selectedScore, setSelectedScore] = useState(0);
-  const [skor, setskor] = useState("");
   const [comment, setcomment] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const cookies = new Cookies();
@@ -41,7 +40,7 @@ export const Detail = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState(null);
+  const [, setLoginError] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
@@ -69,7 +68,6 @@ export const Detail = () => {
   const { state } = useLocation();
 
   const userData = useSelector((state) => state.user);
-  console.log(userData, "user dari reduxxxxx");
 
   const { mutate: putVideo } = usePutVideo();
 
@@ -90,7 +88,6 @@ export const Detail = () => {
   const { data: progressCourse, refetch: refetchProgress } = useGetProgress();
 
   const progress = progressCourse?.data?.data?.result;
-  console.log(progress, "progressnyaa");
 
   // mencari progress dari courseid
   const progressForCurrentCourse = progress?.find((progress) => progress.course_id === state.courseId);
@@ -98,7 +95,6 @@ export const Detail = () => {
 
   //fetch rating
   const { data: ratingCourse } = useGetRating({}, state.courseId, SelctedScore, 10, PageNow);
-  console.log(ratingCourse, "rating courseeee");
 
   //POST RATING
   const { mutate: getPostRating } = usePostRating();
@@ -115,7 +111,6 @@ export const Detail = () => {
   });
 
   const dataCourseDetail = getCourseDetail?.data || [];
-  console.log(dataCourseDetail, "detailcourse");
 
   const handleCheckout = () => {
     getPostCourse({
@@ -171,7 +166,7 @@ export const Detail = () => {
         setActiveVideoUrl(firstVideoEmbedUrl);
       }
     }
-  }, [detailSuccess, getCourseDetail?.data?.Chapter]);
+  }, [detailSuccess, getCourseDetail?.data?.course?.Chapter]);
 
   const isVideoDone = (videoId) => {
     const account_id = userData.id_user;
@@ -232,9 +227,7 @@ export const Detail = () => {
           }
           setCompletedChapters([...completedChapters, currentChapterIndex]);
         },
-        onError: (error) => {
-          console.error("Error updating video status", error);
-        },
+        onError: (error) => {},
       }
     );
   };

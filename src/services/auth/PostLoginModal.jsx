@@ -8,12 +8,12 @@ const LoginUserModal = async (input) => {
     .post(API_ENDPOINT.LOGIN_USER, input)
     .then((result) => {
       CookieStorage.set(CookiesKeys?.AuthToken, result?.data?.data?.token);
-      console.log(result?.data?.data?.user?.role, "role kah ");
+      // console.log(result?.data?.data?.user?.role, "role kah ");
 
       return result?.data;
     })
     .catch((err) => {
-      console.log(err?.response?.data?.error, "err login");
+      // console.log(err?.response?.data?.error, "err login");
       // alert(err.response.data.error);
       throw new Error(err.response.data.error);
     });

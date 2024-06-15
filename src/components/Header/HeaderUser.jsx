@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiChevronDown, FiLogIn } from "react-icons/fi";
 import { BiSearchAlt } from "react-icons/bi";
-import { LuBell } from "react-icons/lu";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CookieStorage, CookiesKeys } from "../../utils/cookies";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +15,7 @@ export const HeaderUser = () => {
   const [getHandleDropwdown, setHandleDropdown] = useState(false);
   const [getBurger, setBurger] = useState(false);
 
-  const searchValue = localStorage.getItem("searchValues")
-    ? localStorage.getItem("searchValues")
-    : "";
+  const searchValue = localStorage.getItem("searchValues") ? localStorage.getItem("searchValues") : "";
 
   const [getSearch, setSearch] = useState(searchValue);
 
@@ -46,7 +43,7 @@ export const HeaderUser = () => {
     if (token) {
       dispatch(getDataMe());
     }
-  }, [token]);
+  }, [token, dispatch]);
 
   const { name, email, url } = useSelector((state) => state.user);
 
@@ -57,20 +54,12 @@ export const HeaderUser = () => {
 
   return (
     <div className="mobile:relative desktop:static desktopfull:static mobile:p-0 desktop:px-36 desktopfull:px-36 desktop:py-3 desktopfull:py-3 bg-primary">
-      <div
-        onClick={() => setBurger(false)}
-        className={`${
-          getBurger ? "mobile:block" : "mobile:hidden"
-        } mobile:fixed z-20 desktop:hidden desktopfull:hidden bg-black/30 h-[100dvh] w-[100dvh]`}
-      ></div>
+      <div onClick={() => setBurger(false)} className={`${getBurger ? "mobile:block" : "mobile:hidden"} mobile:fixed z-20 desktop:hidden desktopfull:hidden bg-black/30 h-[100dvh] w-[100dvh]`}></div>
       <div className="mobile:flex items-center justify-center relative desktop:hidden desktopfull:hidden py-3">
         <div className="cursor-pointer" onClick={() => navigate("/home")}>
           <img src={logo} alt="" className="w-20 object-cover" />
         </div>
-        <RxHamburgerMenu
-          onClick={() => setBurger(true)}
-          className="absolute z-50 right-4 cursor-pointer text-white hover:text-gray-300"
-        />
+        <RxHamburgerMenu onClick={() => setBurger(true)} className="absolute z-50 right-4 cursor-pointer text-white hover:text-gray-300" />
       </div>
       <div
         className={`mobile:fixed desktop:static desktopfull:static mobile:z-20 mobile:top-0 ${
@@ -79,16 +68,10 @@ export const HeaderUser = () => {
       >
         <div className="flex mobile:flex-col desktop:flex-row desktopfull:flex-row items-center mobile:gap-5 desktop:gap-16 desktopfull:gap-16 mobile:4/5 desktop:w-1/2 desktopfull:1/2">
           <div className="mobile:flex mobile:items-center mobile:justify-center relative w-full mobile:mb-0 desktop:mb-0 desktopfull:mb-0">
-            <div
-              className="mobile:flex mobile:justify-center mobile:items-center cursor-pointer"
-              onClick={() => navigate("/home")}
-            >
+            <div className="mobile:flex mobile:justify-center mobile:items-center cursor-pointer" onClick={() => navigate("/home")}>
               <img src={logo} alt="" className="w-32 object-cover" />
             </div>
-            <RxCross2
-              className="w-5 h-5 absolute mobile:block desktop:hidden desktopfull:hidden right-0 text-white cursor-pointer"
-              onClick={() => setBurger(false)}
-            />
+            <RxCross2 className="w-5 h-5 absolute mobile:block desktop:hidden desktopfull:hidden right-0 text-white cursor-pointer" onClick={() => setBurger(false)} />
           </div>
           <div className="relative flex items-center w-full">
             <input
@@ -99,10 +82,7 @@ export const HeaderUser = () => {
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={handleSearch}
             />
-            <button
-              onClick={handleSearch}
-              className="absolute right-4 text-primary"
-            >
+            <button onClick={handleSearch} className="absolute right-4 text-primary">
               <BiSearchAlt className="w-5 h-5" />
             </button>
           </div>
@@ -111,11 +91,7 @@ export const HeaderUser = () => {
         {token ? (
           <div className="relative flex items-center mobile:flex-col desktop:flex-row desktopfull:flex-row mobile:mt-5 desktop:mt-0 desktopfull:mt-0 desktop:gap-5 desktopfull:gap-5 mobile:gap-0 mobile:w-full desktop:w-auto desktopfull:w-auto mobile:text-sm desktop:text-base desktopfull:text-base text-white">
             <div className="mobile:flex mobile:flex-col mobile:gap-1.5 w-full desktop:hidden desktopfull:hidden mobile:pb-3 text-center desktop:pb-0 desktopfull:pb-0 mb-4">
-              <img
-                src={url}
-                alt="profilepicture"
-                className="w-8 h-8 object-cover rounded-full mx-auto text-center"
-              />
+              <img src={url} alt="profilepicture" className="w-8 h-8 object-cover rounded-full mx-auto text-center" />
               <div className="text-gray-300 font-semibold mt-1">{name}</div>
               <div className="text-gray-300 text-xs">{email}</div>
             </div>
@@ -130,56 +106,31 @@ export const HeaderUser = () => {
               to={"/notifikasi"}
             >
               {/* <LuBell className="mobile:hidden desktop:block desktopfull:block w-6 h-6 stroke-1" /> */}
-              <div className="desktop:font-semibold desktopfull:font-semibold">
-                Notifikasi
-              </div>
+              <div className="desktop:font-semibold desktopfull:font-semibold">Notifikasi</div>
             </Link>
             <div
               className="mobile:hidden desktop:flex desktopfull:flex items-center justify-center gap-1 py-1 cursor-pointer hover:bg-white hover:text-primary hover:rounded-lg desktop:w-[150px] desktopfull:w-[150px] desktop:h-full"
-              onClick={() =>
-                getHandleDropwdown
-                  ? setHandleDropdown(false)
-                  : setHandleDropdown(true)
-              }
+              onClick={() => (getHandleDropwdown ? setHandleDropdown(false) : setHandleDropdown(true))}
             >
               <div>
-                <img
-                  src={url}
-                  alt="profilepicture"
-                  className="w-8 h-8 object-cover rounded-full"
-                />
+                <img src={url} alt="profilepicture" className="w-8 h-8 object-cover rounded-full" />
               </div>
-              <div className="ms-2 desktop:font-semibold desktopfull:font-semibold">
-                {name}
-              </div>
+              <div className="ms-2 desktop:font-semibold desktopfull:font-semibold">{name}</div>
               <FiChevronDown className="w-5 h-5 stroke-1 mt-1" />
             </div>
             <div
               className={`${
-                getHandleDropwdown
-                  ? "desktop:flex desktop:flex-col desktopfull:flex desktopfull:flex-col"
-                  : "desktop:hidden desktopfull:hidden"
+                getHandleDropwdown ? "desktop:flex desktop:flex-col desktopfull:flex desktopfull:flex-col" : "desktop:hidden desktopfull:hidden"
               } mobile:hidden absolute top-10 right-0 z-10 text-sm rounded-lg bg-primary border border-gray-50`}
             >
-              <div className="px-4 py-3 text-xs text-slate-50 border-b border-slate-300">
-                {email}
-              </div>
-              <Link
-                className="ps-4 pe-16 py-3 hover:bg-gray-100 hover:text-primary cursor-pointer"
-                to={"/profil"}
-              >
+              <div className="px-4 py-3 text-xs text-slate-50 border-b border-slate-300">{email}</div>
+              <Link className="ps-4 pe-16 py-3 hover:bg-gray-100 hover:text-primary cursor-pointer" to={"/profil"}>
                 Profil
               </Link>
-              <Link
-                className="ps-4 pe-16 py-3 hover:bg-gray-100 hover:text-primary cursor-pointer"
-                to={"/kelassaya"}
-              >
+              <Link className="ps-4 pe-16 py-3 hover:bg-gray-100 hover:text-primary cursor-pointer" to={"/kelassaya"}>
                 Kelas Saya
               </Link>
-              <Link
-                className="ps-4 pe-16 py-3 hover:bg-gray-100 hover:text-primary cursor-pointer"
-                onClick={handleLogout}
-              >
+              <Link className="ps-4 pe-16 py-3 hover:bg-gray-100 hover:text-primary cursor-pointer" onClick={handleLogout}>
                 Keluar
               </Link>
             </div>

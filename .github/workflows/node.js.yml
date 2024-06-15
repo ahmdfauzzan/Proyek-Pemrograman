@@ -2,31 +2,42 @@ name: Node.js CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [$default-branch] # Memicu workflow pada push ke cabang default
   pull_request:
-    branches: [ "main" ]
+    branches: [$default-branch] # Memicu workflow pada pull request ke cabang default
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Menentukan runner yang digunakan, yaitu versi terbaru dari Ubuntu
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.x] # Menggunakan matriks strategi untuk menentukan versi Node.js yang digunakan
+        # Lihat jadwal rilis Node.js yang didukung di https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci --legacy-peer-deps
-    - run: CI=false npm run build --if-present
-    - name: Install Vercel CLI
-      run: npm install -g vercel
-    - name: Deploy to Vercel
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      run: vercel --prod --token $VERCEL_TOKEN 
+      - name: Checkout repository # Menetapkan nama langkah ini
+        uses: actions/checkout@v4 # Menggunakan aksi checkout untuk meng-clone repository ke runner
 
+      - name: Use Node.js ${{ matrix.node-version }} # Menetapkan nama langkah ini
+        uses: actions/setup-node@v3 # Menggunakan aksi setup-node untuk menginstal Node.js
+        with:
+          node-version: ${{ matrix.node-version }} # Menentukan versi Node.js sesuai matriks
+          cache: "npm" # Mengaktifkan caching untuk direktori npm
+
+      - name: Install dependencies # Menetapkan nama langkah ini
+        run: npm ci # Menjalankan perintah npm ci untuk instalasi dependensi yang bersih
+
+      - name: Build project # Menetapkan nama langkah ini
+        run: npm run build --if-present # Menjalankan perintah build jika ada script build dalam package.json
+
+      - name: Run tests # Menetapkan nama langkah ini
+        run: npm test # Menjalankan perintah npm test untuk menjalankan pengujian
+
+      - name: Install Vercel CLI # Menetapkan nama langkah ini
+        run: npm install -g vercel # Menginstal Vercel CLI secara global menggunakan npm
+
+      - name: Deploy to Vercel # Menetapkan nama langkah ini
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Menyimpan token Vercel dari secrets repository ke dalam variabel lingkungan
+        run: vercel --prod --token $VERCEL_TOKEN # Menjalankan perintah deploy ke Vercel menggunakan token yang disediakan, dan melakukan deploy ke lingkungan produksi

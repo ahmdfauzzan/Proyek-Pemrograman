@@ -140,46 +140,32 @@ export const Homepage = () => {
         <table className="mb-4 w-full text-center">
           <tr>
             <td
-              className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 11 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
-              value="11"
-              onClick={() => setIdCourse(11)}
-            >
-              Front-End Developer
-            </td>
-            <td
-              className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 12 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
-              value="12"
-              onClick={() => setIdCourse(12)}
-            >
-              Back-End Developer
-            </td>
-            <td
               className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 1 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
               value="1"
               onClick={() => setIdCourse(1)}
             >
-              UI / UX Designer
+              Front-End Developer
             </td>
             <td
-              className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 13 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
-              value="13"
-              onClick={() => setIdCourse(13)}
+              className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 2 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
+              value="2"
+              onClick={() => setIdCourse(2)}
             >
-              Machine Learning
+              Mobile Developer
+            </td>
+            <td
+              className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 3 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
+              value="3"
+              onClick={() => setIdCourse(3)}
+            >
+              Data Science
             </td>
             <td
               className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 4 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
               value="4"
               onClick={() => setIdCourse(4)}
             >
-              Android Developer
-            </td>
-            <td
-              className={`pb-2 px-5 text-base font-medium border-b-2 ${getIdCourse === 5 ? "border-primary text-primary" : "border-gray-300"} hover:border-primary hover:text-primary cursor-pointer`}
-              value="5"
-              onClick={() => setIdCourse(5)}
-            >
-              iOS Developer
+              Internet of Things
             </td>
           </tr>
         </table>
@@ -189,13 +175,13 @@ export const Homepage = () => {
           <div className="font-semibold text-base mb-2">Rata - rata gaji</div>
           <div className="flex mobile:flex-col desktop:flex-row desktop:items-center mobile:gap-1 desktop:gap-4 mb-2">
             <div className="desktop:w-1/3 desktop:ps-5 desktop:py-2 desktop:rounded desktop:text-white desktop:bg-yellow-400">Di Indonesia</div>
-            <div className="mobile:hidden desktop:block">Rp.{dataSalary.gaji_dn} / thn</div>
-            <div className="desktop:hidden mobile:text-xs desktop:text-sm desktopfull:text-sm w-3/5 ps-5 py-2 rounded text-white bg-yellow-400">Rp.{dataSalary.gaji_dn} / thn</div>
+            <div className="mobile:hidden desktop:block">{dataSalary.gaji_dn} / thn</div>
+            <div className="desktop:hidden mobile:text-xs desktop:text-sm desktopfull:text-sm w-3/5 ps-5 py-2 rounded text-white bg-yellow-400">{dataSalary.gaji_dn} / thn</div>
           </div>
           <div className="flex mobile:flex-col desktop:flex-row desktop:items-center mobile:gap-1 desktop:gap-4">
             <div className="desktop:w-4/5 desktop:ps-5 desktop:py-2 desktop:rounded desktop:text-white desktop:bg-primary">Di Luar Negeri</div>
-            <div className="mobile:hidden desktop:block">Rp.{dataSalary.gaji_ln} / thn</div>
-            <div className="desktop:hidden mobile:text-xs desktop:text-sm desktopfull:text-sm w-full ps-5 py-2 rounded text-white bg-primary">Rp.{dataSalary.gaji_ln} / thn</div>
+            <div className="mobile:hidden desktop:block">{dataSalary.gaji_ln} / thn</div>
+            <div className="desktop:hidden mobile:text-xs desktop:text-sm desktopfull:text-sm w-full ps-5 py-2 rounded text-white bg-primary">{dataSalary.gaji_ln} / thn</div>
           </div>
           <hr className="my-7" />
           <div className="grid mobile:grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 gap-5">

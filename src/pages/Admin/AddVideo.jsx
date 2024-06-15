@@ -16,7 +16,6 @@ import { useDeleteVideo } from "../../services/admin/DeleteVideo";
 import { useAllChapter } from "../../services/admin/GetAllChapter";
 import { BsDot } from "react-icons/bs";
 import { useGetVideoId } from "../../services/admin/GetVideoId";
-import { useDeleteChapter } from "../../services/admin/DeleteChapter";
 import { ToastContainer, toast } from "react-toastify";
 import { useMemo } from "react";
 

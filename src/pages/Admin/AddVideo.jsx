@@ -102,7 +102,7 @@ export const AddVideo = () => {
   }, [successPostChapter, refetchAllChapter, dataAllChapter, getIdChapter]);
 
   // PUT CHAPTER
-  const { mutate: putChapter, isSuccess: successPutChapter } = usePutChapter({
+  const { mutate: putChapter } = usePutChapter({
     chapter_id: getIdChapter,
   });
 
@@ -152,12 +152,7 @@ export const AddVideo = () => {
     setDataAllChapter(filterAllChapter || []);
   }, [successPostChapter, refetchAllChapter, dataAllChapter, getIdChapter]);
 
-  // HANDLE DELETE CHAPTER
-  const [getChapterIdDelete, setChapterIdDelete] = useState();
-
-  const { mutate: deleteChapter } = useDeleteChapter({
-    chapter_id: getChapterIdDelete,
-  });
+  // HANDLE DELETE CHAPTE
 
   // API VIDEO
   const [getCloseAddEdit, setCloseAddEdit] = useState(false);
@@ -215,8 +210,7 @@ export const AddVideo = () => {
   // Menggunakan useEffect dengan dependensi yang sesuai
   useEffect(() => {
     // Gunakan dataVideoById di sini
-    console.log(dataVideoById);
-
+    // console.log(dataVideoById);
     // Logika useEffect
   }, [dataVideoById]); // Tambahkan dependensi yang sesuai di sini
 

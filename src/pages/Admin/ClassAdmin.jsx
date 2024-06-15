@@ -245,11 +245,7 @@ export const ClassAdmin = () => {
   // DELETE COURSE
   const [getIdCourseDelete, setIdCourseDelete] = useState();
 
-  const {
-    mutate: deleteCourse,
-    data: dataDeleteCourse,
-    isSuccess: successDeleteCourse,
-  } = useDeleteCourse({
+  const { mutate: deleteCourse, isSuccess: successDeleteCourse } = useDeleteCourse({
     course_id: getIdCourseDelete,
   });
 

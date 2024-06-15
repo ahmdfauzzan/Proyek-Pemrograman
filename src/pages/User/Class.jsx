@@ -6,7 +6,6 @@ import { useCategory } from "../../services/user/GetCategory";
 import { LayoutUser } from "../../Layout/LayoutUser";
 import { MdOutlineSell } from "react-icons/md";
 import { BsDot } from "react-icons/bs";
-import { CookieStorage, CookiesKeys } from "../../utils/cookies";
 
 export const Class = () => {
   const navigate = useNavigate();

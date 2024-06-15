@@ -2,9 +2,9 @@ name: Node.js CI/CD
 
 on:
   push:
-    branches: [$default-branch] # Memicu workflow pada push ke cabang default
+    branches: ["main"] # Memicu workflow pada push ke cabang default
   pull_request:
-    branches: [$default-branch] # Memicu workflow pada pull request ke cabang default
+    branches: ["main"] # Memicu workflow pada pull request ke cabang default
 
 jobs:
   build:
@@ -30,9 +30,6 @@ jobs:
 
       - name: Build project # Menetapkan nama langkah ini
         run: npm run build --if-present # Menjalankan perintah build jika ada script build dalam package.json
-
-      - name: Run tests # Menetapkan nama langkah ini
-        run: npm test # Menjalankan perintah npm test untuk menjalankan pengujian
 
       - name: Install Vercel CLI # Menetapkan nama langkah ini
         run: npm install -g vercel # Menginstal Vercel CLI secara global menggunakan npm

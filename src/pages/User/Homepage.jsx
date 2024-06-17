@@ -107,7 +107,7 @@ export const Homepage = () => {
                 <img src={value.url_image_preview} alt="" className="w-full h-[9rem] object-cover rounded-t-3xl" />
                 <div className="px-3.5 pt-2 pb-5">
                   <div className="text-primary">{value.Kategori.title}</div>
-                  <div className="font-bold whitespace-nowrap overflow-hidden text-base">{value.title}</div>
+                  <div className="font-black whitespace-nowrap overflow-hidden text-slate-900">{value.title}</div>
                   <div className="font-medium text-xs">
                     by <span>{value.Mentor.name}</span>
                   </div>

@@ -360,7 +360,7 @@ export const MyClass = () => {
                             <span>{course.avgRating !== 0 ? Math.floor(course.avgRating * 10) / 10 : "-"}</span>
                           </div>
                         </div>
-                        <div className="font-bold whitespace-nowrap overflow-hidden">{course.title}</div>
+                        <div className="font-black whitespace-nowrap overflow-hidden text-slate-900">{course.title}</div>
                         <div className="font-medium">by {course.Mentor.name}</div>
                         <div className="flex items-center gap-0.5 text-xs">
                           <div>{course.level}</div>

@@ -24,11 +24,10 @@ export const Berhasil = () => {
 
         <div className="w-full flex flex-col items-center">
           <div className=" w-auto mt-5  flex flex-col items-center p-4">
-            <h1 className="text-3xl text-[#6148FF] font-bold mb-4">Selamat!</h1>
             {/* Anda perlu menambahkan src untuk gambar Anda */}
             <img src={berhasil} alt="img berhasil" className="mb-4" />
-            <span className="text-xl font-semibold text-black">Transaksi pembayaran kelas premium berhasil!</span>
-            <span className="text-xl text-black my-2">E-receipt telah dikirimkan ke email.</span>
+            <span className="text-xl font-semibold text-black">Transaksi pembayaran kelas berhasil!</span>
+            <span className="text-xl text-black my-2">Selamat Belajar dan mendapatkan ilmu baru &#x1F929; &#x1F929;</span>
             <button onClick={handleMulaiBelajarClick} className="text-center bg-[#6148FF] text-white font-bold py-2 px-4 rounded-full mt-6 mb-2 w-full">
               Mulai Belajar
             </button>

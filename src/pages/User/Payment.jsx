@@ -10,7 +10,7 @@ export const Payment = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [activeBank, setActiveBank] = useState("");
-  const [activeCard, setActiveCard] = useState("");
+  const [, setActiveCard] = useState("");
 
   const toggleActiveBank = (bankName) => {
     if (activeBank === bankName) {

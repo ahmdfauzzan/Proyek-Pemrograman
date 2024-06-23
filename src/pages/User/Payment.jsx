@@ -96,11 +96,10 @@ export const Payment = () => {
               </Accordion.Panel>
             </Accordion>
 
-            <Accordion collapseAll>
+            {/* <Accordion collapseAll>
               <Accordion.Panel>
                 <Accordion.Title className="bg-[#6148FF] text-white font-bold hover:bg-blue-800">Credit Card</Accordion.Title>
                 <Accordion.Content className="bg-white pb-8">
-                  {/* Credit Card Form */}
                   <div className="flex justify-center w-full gap-10 mb-4">
                     <button onClick={() => toggleActiveCard("Mastercard")} className={`transform transition duration-300 ease-in-out relative ${activeCard === "Mastercard" ? "scale-105 ring-2 ring-[#6148FF] p-2" : "hover:scale-105"}`}>
                       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/100px-Mastercard-logo.svg.png" alt="Mastercard" className="w-20 h-20 object-contain" />
@@ -145,7 +144,7 @@ export const Payment = () => {
                   </div>
                 </Accordion.Content>
               </Accordion.Panel>
-            </Accordion>
+            </Accordion> */}
           </div>
 
           <div className="w-full desktop:w-2/5 p-4">

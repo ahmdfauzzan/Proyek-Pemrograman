@@ -21,14 +21,14 @@ export const Payment = () => {
     }
   };
 
-  const toggleActiveCard = (cardName) => {
-    if (activeCard === cardName) {
-      setActiveCard("");
-    } else {
-      setActiveCard(cardName);
-      setActiveBank(""); // Deselect any active bank when a card is selected
-    }
-  };
+  // const toggleActiveCard = (cardName) => {
+  //   if (activeCard === cardName) {
+  //     setActiveCard("");
+  //   } else {
+  //     setActiveCard(cardName);
+  //     setActiveBank(""); // Deselect any active bank when a card is selected
+  //   }
+  // };
 
   // GET DETAIL COURSE
   const { data: getCourseDetail } = useCourseDetail({

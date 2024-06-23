@@ -107,7 +107,7 @@ export const Homepage = () => {
                 <img src={value.url_image_preview} alt="" className="w-full h-[9rem] object-cover rounded-t-3xl" />
                 <div className="px-3.5 pt-2 pb-5">
                   <div className="text-primary">{value.Kategori.title}</div>
-                  <div className="font-black whitespace-nowrap overflow-hidden text-slate-900">{value.title}</div>
+                  <div className="font-bold whitespace-nowrap overflow-hidden text-base">{value.title}</div>
                   <div className="font-medium text-xs">
                     by <span>{value.Mentor.name}</span>
                   </div>
@@ -228,7 +228,7 @@ export const Homepage = () => {
         <div className="text-lg text-yellow-300 tracking-wider font-medium mb-3">Trusted by 500k+ Students</div>
         <div className="text-2xl font-medium tracking-wide mb-3">Gabung komunitas CourseWay Sekarang !</div>
         <div className="text-lg font-medium text-center desktop:px-64 text-gray-300 mb-10">CourseWay telah dipercaya dan mendapat review baik dari alumni CourseWay dari seluruh Indonesia</div>
-        <div className="carousel carousel-center h-80 mobile:w-full desktop:w-1/2 desktop:h-96 desktopfull::w-1/3 desktopfull:h-[400px] bg-transparent space-x-4 rounded-box">
+        <div className="carousel carousel-center h-80 mobile:w-full desktop:w-1/2 desktop:h-96 desktopfull:w-1/3 desktopfull:h-[400px] bg-transparent space-x-4 rounded-box">
           <Carousel leftControl={<div className="hidden"></div>} rightControl={<div className="hidden"></div>}>
             {dataRating.slice(0, 9).map((value, index) => {
               const categoryReview = (id) => {
@@ -242,7 +242,7 @@ export const Homepage = () => {
               const categoryName = categoryReview(value.course_id)[0]?.category || "";
 
               return (
-                <div className="flex flex-col w-[80%] h-1/2 space-y-3 bg-white text-black rounded-box px-5 py-6 desktop:w-full desktop:h-56 desktopfull:h-80 desktopfull:w-1/2" key={index}>
+                <div className="flex flex-col w-full h-1/2 space-y-3 bg-white text-black rounded-box px-5 py-6 desktop:w-full desktop:h-56 desktopfull:h-80 desktopfull:w-full" key={index}>
                   <div className="flex items-center gap-3">
                     <div>
                       <img src={value.Account.url_image} alt="profile pic" className="w-7 h-7 desktop:w-[50px] desktop:h-[50px] desktopfull:w-[100px] desktopfull:h-[100px] object-cover rounded-full" />

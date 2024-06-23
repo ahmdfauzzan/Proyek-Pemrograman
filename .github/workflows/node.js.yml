@@ -2,9 +2,9 @@ name: Node.js CI/CD
 
 on:
   push:
-    branches: ["main"] # Memicu workflow pada push ke cabang default
+    branches: ["main"]
   pull_request:
-    branches: ["main"] # Memicu workflow pada pull request ke cabang default
+    branches: ["main"]
 
 jobs:
   build:
